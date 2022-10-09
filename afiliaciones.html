@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta author="Ricardo Zabaleta Diaz - Miguel David Vidal Guerrero" description="Actividad Clase">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/jpg" href="./img/icono.jpg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+  <title>Afiliaciones</title>
+  <link rel="stylesheet" href="estilos/estilos.css">
+
+</head>
+<body>
+  <!--Nav de la pagina-->
+  <div>
+    <nav class="navbar navbar-dark bg-primary fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="inicio.html">Eps Salud Vida</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="inicio.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="afiliaciones.html">Afiliaciones</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="Empleados.html">Empleadores</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="independiente.html">Independientes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Salir</a>
+            </li>
+          </ul><hr>
+          <span class="navbar-text">
+            Muchas gracias por ser parte de nosotros...
+          </span>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <br><br>
+  <!--Tabla para mostrar datos-->
+    <div class="container mt-3">
+      <table class="table table-striped table-hover" id="example">
+        <thead>
+            <th scope="col">Tipo_id</th>
+            <th scope="col">Numero ID</th>
+            <th scope="col">Paciente</th>
+            <th scope="col">Especialidad</th>
+            <th scope="col">Fecha y horas</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr>
+            <th scope="row">1</th>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mt-4 d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Agregar
+        </button>
+        <button type="button" class="btn btn-danger"  id="liveToastBtn" onclick="eliminarTodo()">
+          Eliminar Todo
+        </button></div>
+    </div>
+
+    <!--Toast utilizado-->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img style="width:10px"src="data:image/png;base64,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" class="rounded me-2" alt="...">
+          <strong class="me-auto">Alerta</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+          Registro eliminado con exito
+        </div>
+      </div>
+    </div>
+
+    
+        <!--table class="table table-striped" id="example">
+            <thead class="">
+                <tr>
+                    <th scope="">Tipo identificacion</th>
+                    <th scope="">Numero identificacion</th>
+                    <th scope="">Paciente</th>
+                    <th scope="">Especialidad</th>
+                    <th scope="">Fecha y Hora</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <tr>
+                    <th scope="row">1</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div-->
+     
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Afilicaion Por Paciente</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form id="formulario">
+                <p class="card-text bg-success"></p>
+                <div class="row">
+                <div class="mb-3 col-6">
+                  <label for="tipo_id" class="form-label">Tipo documento</label>
+                  <select name="" id="tdoc" class="form-select">
+                    <option value="cc">Cedula Ciudadaniea</option>
+                    <option value="ce">Cedula Extranjera</option>
+                    <option value="ti">Tarjeta Identidad</option>
+                    <option value="rc">Registro Civil</option>
+                    <option value="otro">otro</option>
+                  </select>
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="identificacion" class="form-label">Identificacion</label>
+                    <input type="number" class="form-control" id="id" placeholder="identificacion" required>
+                  </div>
+                <div class="mb-3">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+                </div>
+                <div class="mb-3 col-6">
+                  <label for="especialidad" class="form-label">Especialidad</label>
+                  <select name="" id="especialidad" class="form-select">
+                    <option value="medico_general">Medico General</option>
+                    <option value="oftagmologia">Oftagmologia</option>
+                    <option value="pediatra">Pediatra</option>
+                    <option value="ginecologia">Ginecologia</option>
+                    <option value="odontologia">Pediatra</option>
+                  </select>
+                </div>
+                <div class="mb-3 col-6">
+                    <label for="fecha" class="form-label">Fecha y Hora</label>
+                    <input type="datetime-local" class="form-control" id="fecha" placeholder="Nombre" required>
+                </div>
+                <div class="mb-3">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                  </div>
+                  <input type="submit" class="btn btn-primary" value="Aceptar">
+                </div> </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Contenedor para editar-->
+  <div id="body" style="display: none;" class="container">
+    <div class="modal-body">
+        <form id="formulario">
+            <h5 class="card-title ">Actualizacion</h5>
+            <p class="card-text bg-success"></p>
+            <div class="mb-3">
+              <label for="tipo_id" class="form-label">Tipo documento</label>
+              <select name="" id="tdoc" class="form-control">
+                <option value="cc">Cedula Ciudadaniea</option>
+                <option value="ce">Cedula Extranjera</option>
+                <option value="ti">Tarjeta Identidad</option>
+                <option value="rc">Registro Civil</option>
+                <option value="otro">otro</option>
+              </select>
+            </div>
+            <div class="mb-3">
+                <label for="identificacion" class="form-label">Identificacion</label>
+                <input type="number" class="form-control" id="id" placeholder="identificacion" required>
+              </div>
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" placeholder="Nombre" required>
+            </div>
+            <div class="mb-3">
+              <label for="especialidad" class="form-select">Especialidad</label>
+              <select name="" id="especialidad" class="form-control">
+                <option value="medico_general">Medico General</option>
+                <option value="oftagmologia">Oftagmologia</option>
+                <option value="pediatra">Pediatra</option>
+                <option value="ginecologia">Ginecologia</option>
+                <option value="odontologia">Pediatra</option>
+              </select>
+            </div>
+            <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha y Hora</label>
+                <input type="datetime-local" class="form-control" id="fecha" placeholder="Nombre" required>
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+              </div>
+              <input type="submit" class="btn btn-primary" value="Aceptar">
+          </form>
+    </div>
+  </div>
+<br>
+
+<!--Footer-->
+<div>
+  <footer class="text-center text-white bg-primary mt-3" >
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!-- Section: Images -->
+      <section class="">
+        <div class="row">
+          <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            <div
+              class="bg-image hover-overlay ripple shadow-1-strong rounded"
+              data-ripple-color="light"
+            >
+              <img id="ima"
+                src="https://mdbcdn.b-cdn.net/img/new/fluid/city/113.webp"
+                class="img-fluid" alt="Responsive image" 
+              />
+              <a href="#!">
+                <div
+                  class="mask"
+                  style="background-color: rgba(251, 251, 251, 0.2);"
+                ></div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            <div
+              class="bg-image hover-overlay ripple shadow-1-strong rounded"
+              data-ripple-color="light"
+            >
+              <img id="ima"
+                src="https://mdbcdn.b-cdn.net/img/new/fluid/city/111.webp"
+                class="w-100"
+              />
+              <a href="#!">
+                <div
+                  class="mask"
+                  style="background-color: rgba(251, 251, 251, 0.2);"
+                ></div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            <div
+              class="bg-image hover-overlay ripple shadow-1-strong rounded"
+              data-ripple-color="light"
+            >
+              <img id="ima"
+                src="https://mdbcdn.b-cdn.net/img/new/fluid/city/112.webp"
+                class="w-100"
+              />
+              <a href="#!">
+                <div
+                  class="mask"
+                  style="background-color: rgba(251, 251, 251, 0.2);"
+                ></div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            <div
+              class="bg-image hover-overlay ripple shadow-1-strong rounded"
+              data-ripple-color="light"
+            >
+              <img id="ima"
+                src="https://mdbcdn.b-cdn.net/img/new/fluid/city/114.webp"
+                class="w-100"
+              />
+              <a href="#!">
+                <div
+                  class="mask"
+                  style="background-color: rgba(251, 251, 251, 0.2);"
+                ></div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            <div
+              class="bg-image hover-overlay ripple shadow-1-strong rounded"
+              data-ripple-color="light"
+            >
+              <img id="ima"
+                src="https://mdbcdn.b-cdn.net/img/new/fluid/city/115.webp"
+                class="w-100"
+              />
+              <a href="#!">
+                <div
+                  class="mask"
+                  style="background-color: rgba(251, 251, 251, 0.2);"
+                ></div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+            <div
+              class="bg-image hover-overlay ripple shadow-1-strong rounded"
+              data-ripple-color="light"
+            >
+              <img id="ima"
+                src="https://mdbcdn.b-cdn.net/img/new/fluid/city/116.webp"
+                class="w-100"
+              />
+              <a href="#!">
+                <div
+                  class="mask"
+                  style="background-color: rgba(251, 251, 251, 0.2);"
+                ></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Section: Images -->
+    </div>
+    <!-- Grid container -->
+  
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: #0033FF;" >
+      © 2022 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">Ricardo Jose Zabaleta Diaz - Miguel David Vidal Guerrero</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+</div>
+    <script src="funciones/afiliaciones.js"></script>
+    <script>
+      $(document).ready(async function () {
+        await mostrar();
+        $('#example').DataTable({responsive:true});
+      }); 
+    </script>
+</body>
+</html>
